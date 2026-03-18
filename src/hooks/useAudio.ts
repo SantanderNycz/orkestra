@@ -17,6 +17,7 @@ export function useAudio() {
   const stopRef = useRef<(() => void) | null>(null);
   const [status, setStatus] = useState<AudioStatus>("idle");
   const [activeChord, setActiveChord] = useState<Chord | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   // Inicialização lazy do sintetizador
   const ensureSynth = useCallback(async (): Promise<SynthInstance> => {
@@ -35,6 +36,7 @@ export function useAudio() {
       const synth = await ensureSynth();
       setStatus("playing-chord");
       setActiveChord(chord);
+      setActiveIndex(null);
       playChord(synth, chord.notes);
 
       setTimeout(() => {
@@ -65,11 +67,15 @@ export function useAudio() {
         chords,
         900,
         // onChord — chamado a cada acorde da sequência
-        (chord) => setActiveChord(chord),
+        (chord, index) => {
+          setActiveChord(chord);
+          setActiveIndex(index);
+        },
         // onEnd — chamado quando termina ou é parada
         () => {
           setStatus("idle");
           setActiveChord(null);
+          setActiveIndex(null);
           stopRef.current = null;
         },
       );
@@ -85,11 +91,13 @@ export function useAudio() {
     stopRef.current = null;
     setStatus("idle");
     setActiveChord(null);
+    setActiveIndex(null);
   }, []);
 
   return {
     status,
     activeChord,
+    activeIndex,
     isIdle: status === "idle",
     isPlayingSequence: status === "playing-sequence",
     triggerChord,

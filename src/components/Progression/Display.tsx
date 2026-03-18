@@ -125,10 +125,10 @@ function ProgressionCard({ chord, isActive }: ProgressionCardProps) {
 
 interface DisplayProps {
   progression: Progression;
-  activeChord: Chord | null; // acorde sendo tocado (vem do useAudio)
+  activeIndex: number | null;
 }
 
-export function Display({ progression, activeChord }: DisplayProps) {
+export function Display({ progression, activeIndex }: DisplayProps) {
   if (progression.length === 0) {
     return (
       <div
@@ -149,11 +149,7 @@ export function Display({ progression, activeChord }: DisplayProps) {
       {/* Cards dos acordes */}
       <div className="flex gap-2 flex-wrap">
         {progression.map((chord, i) => (
-          <ProgressionCard
-            key={i}
-            chord={chord}
-            isActive={activeChord?.deg === chord.deg}
-          />
+          <ProgressionCard key={i} chord={chord} isActive={activeIndex === i} />
         ))}
       </div>
 

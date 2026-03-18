@@ -16,6 +16,7 @@ const ENHARMONIC: Record<string, string> = {
 export function toToneNote(noteName: string, index: number): string {
   const normalized = ENHARMONIC[noteName] ?? noteName;
   const octave = index === 0 ? 3 : 4;
+  
   return `${normalized}${octave}`;
 }
 
@@ -45,10 +46,14 @@ export async function createSynth(): Promise<SynthInstance> {
 
 // playback
 
-export function playChord(synth: SynthInstance, notes: string[]): void {
+export function playChord(
+  synth: SynthInstance,
+  notes: string[],
+  duration = "1n",
+): void {
   if (!synth) return;
   const toneNotes = chordToToneNotes(notes);
-  synth.triggerAttackRelease(toneNotes, "1n");
+  synth.triggerAttackRelease(toneNotes, duration);
 }
 export function playSequence(
   synth: SynthInstance,
@@ -73,7 +78,7 @@ export function playSequence(
     }
 
     const chord = chords[index];
-    playChord(synth, chord.notes);
+    playChord(synth, chord.notes, "4n");
     onChord?.(chord, index);
     index++;
 

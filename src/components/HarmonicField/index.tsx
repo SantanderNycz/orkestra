@@ -169,6 +169,7 @@ export function HarmonicFieldApp() {
               <Display
                 progression={hf.progression}
                 activeChord={audio.activeChord}
+                activeIndex={audio.activeIndex}
               />
             </div>
           </div>

@@ -14,44 +14,44 @@ import type {
 // Notas
 
 // Sustenidos
-const SHARP_NAMES: Record<number, string> = {
-  0: "C",
-  1: "C#",
-  2: "D",
-  3: "D#",
-  4: "E",
-  5: "F",
-  6: "F#",
-  7: "G",
-  8: "G#",
-  9: "A",
-  10: "A#",
-  11: "B",
-};
+const SHARP_NAMES = [
+  "C",
+  "C#",
+  "D",
+  "D#",
+  "E",
+  "F",
+  "F#",
+  "G",
+  "G#",
+  "A",
+  "A#",
+  "B",
+] as const;
 
 // Bemol
-const FLAT_NAMES: Record<number, string> = {
-  0: "C",
-  1: "Db",
-  2: "D",
-  3: "Eb",
-  4: "E",
-  5: "F",
-  6: "Gb",
-  7: "G",
-  8: "Ab",
-  9: "A",
-  10: "Bb",
-  11: "B",
-};
+const FLAT_NAMES = [
+  "C",
+  "Db",
+  "D",
+  "Eb",
+  "E",
+  "F",
+  "Gb",
+  "G",
+  "Ab",
+  "A",
+  "Bb",
+  "B",
+] as const;
 
 // bemol por convenção
 const FLAT_ROOTS = new Set<number>([1, 3, 5, 6, 8, 10]);
 
 export function noteName(semi: number, rootIndex: number): string {
-  return (FLAT_ROOTS.has(rootIndex) ? FLAT_NAMES : SHARP_NAMES)[
-    ((semi % 12) + 12) & 12
-  ];
+  const idx = ((semi % 12) + 12) % 12;
+  const names = FLAT_ROOTS.has(rootIndex) ? FLAT_NAMES : SHARP_NAMES;
+  return names[idx] ?? "C";
 }
 
 // Modos
