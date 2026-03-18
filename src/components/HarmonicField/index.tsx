@@ -72,7 +72,7 @@ export function HarmonicFieldApp() {
       {/* Cabeçalho */}
       <div>
         <h1 className="text-2xl font-medium text-zinc-100 tracking-tight">
-          Harmonic Field
+          Orkestra
         </h1>
         <p className="text-sm text-zinc-500 mt-1">
           Explore campos harmônicos, gere progressões e visualize acordes

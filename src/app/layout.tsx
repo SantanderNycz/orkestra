@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Harmonic Field",
+  title: "Orkestra",
   description:
     "Explora campos harmônicos, gera progressões de acordes e visualiza posições em guitarra, ukulele e teclado.",
   keywords: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Leo Nycz", url: "https://portfolio-leo-nycz.vercel.app" }],
   openGraph: {
-    title: "Harmonic Field",
+    title: "Orkestra",
     description:
       "Explora campos harmônicos e gera progressões de acordes com IA.",
     type: "website",

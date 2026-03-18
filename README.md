@@ -1,4 +1,4 @@
-# Harmonic Field
+# Orkestra
 
 A ferramenta interativa para músicos explorarem campos harmónicos, gerar progressões de acordes e visualizar posições em guitarra, ukulele e teclado — com um agente de IA integrado.
 
@@ -11,7 +11,7 @@ A ferramenta interativa para músicos explorarem campos harmónicos, gerar progr
 
 ## O que é
 
-Harmonic Field ajuda músicos — de iniciantes a avançados — a explorar teoria musical de forma visual e sonora. O utilizador escolhe um tom e modo, e o app gera automaticamente o campo harmónico completo com diagramas de acordes, playback, e sugestões inteligentes via IA.
+Orkestra ajuda músicos — de iniciantes a avançados — a explorar teoria musical de forma visual e sonora. O utilizador escolhe um tom e modo, e o app gera automaticamente o campo harmónico completo com diagramas de acordes, playback, e sugestões inteligentes via IA.
 
 ---
 
