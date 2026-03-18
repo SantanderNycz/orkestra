@@ -12,6 +12,8 @@ import { PianoDiagram } from "@/components/Diagrams/PianoDiagram";
 import { GuitarDiagram } from "@/components/Diagrams/GuitarDiagram";
 import { UkuleleDiagram } from "@/components/Diagrams/UkuleleDiagram";
 import { ALL_NOTES } from "@/lib/musicTheory";
+import { SoundsLike } from "@/components/SoundsLike";
+import { Tutorial } from "@/components/Tutorial";
 
 // Labels
 const STAB_NOTE: Record<string, string> = {
@@ -251,18 +253,22 @@ export function HarmonicFieldApp() {
 
       {/* TAB: SOUNDS LIKE */}
       {tab === "sounds" && (
-        <div className="flex items-center justify-center py-16">
-          <span className="text-zinc-600 text-sm">
-            Sounds like... — em breve
-          </span>
-        </div>
+        <SoundsLike
+          onApplyPreset={(p) => {
+            hf.applyAiPreset(p);
+            setTab("campo");
+          }}
+        />
       )}
 
       {/* TAB: TUTORIAL */}
       {tab === "tutorial" && (
-        <div className="flex items-center justify-center py-16">
-          <span className="text-zinc-600 text-sm">Tutorial IA — em breve</span>
-        </div>
+        <Tutorial
+          selectedChord={hf.selectedChord}
+          field={hf.field}
+          root={hf.root}
+          mode={hf.mode}
+        />
       )}
     </div>
   );
