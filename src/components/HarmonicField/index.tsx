@@ -14,6 +14,8 @@ import { UkuleleDiagram } from "@/components/Diagrams/UkuleleDiagram";
 import { ALL_NOTES } from "@/lib/musicTheory";
 import { SoundsLike } from "@/components/SoundsLike";
 import { Tutorial } from "@/components/Tutorial";
+import { serializeState, deserializeState } from "@/lib/urlState";
+import { useEffect, useCallback } from "react";
 
 // Labels
 const STAB_NOTE: Record<string, string> = {
@@ -51,15 +53,43 @@ const NOTE_COLOR: Record<string, string> = {
 };
 
 // Tabs
-
 type Tab = "campo" | "sounds" | "tutorial";
 
 // Componente principal
-
 export function HarmonicFieldApp() {
   const hf = useHarmonicField();
   const audio = useAudio();
   const [tab, setTab] = useState<Tab>("campo");
+
+  const copyLink = useCallback(() => {
+    navigator.clipboard.writeText(window.location.href);
+  }, []);
+
+  useEffect(() => {
+    const state = deserializeState(window.location.search);
+    if (state.root !== undefined) hf.setRoot(state.root);
+    if (state.mode !== undefined) hf.setMode(state.mode);
+    if (state.extension !== undefined) hf.setExtension(state.extension);
+    if (state.progression && state.progression.length > 0) {
+      hf.applyAiPreset({
+        root: state.root ?? hf.root,
+        mode: state.mode ?? hf.mode,
+        extension: state.extension ?? hf.extension,
+        progression: state.progression,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const query = serializeState({
+      root: hf.root,
+      mode: hf.mode,
+      extension: hf.extension,
+      progression: hf.progression.map((c) => c.deg),
+    });
+    window.history.replaceState(null, "", `?${query}`);
+  }, [hf.root, hf.mode, hf.extension, hf.progression]);
 
   const selectedChord = hf.selectedChord;
   const noteColor = selectedChord
@@ -70,13 +100,24 @@ export function HarmonicFieldApp() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 flex flex-col gap-8">
       {/* Cabeçalho */}
-      <div>
-        <h1 className="text-2xl font-medium text-zinc-100 tracking-tight">
-          Orkestra
-        </h1>
-        <p className="text-sm text-zinc-500 mt-1">
-          Explore campos harmônicos, gere progressões e visualize acordes
-        </p>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-medium text-zinc-100 tracking-tight">
+            Orkestra
+          </h1>
+          <p className="text-sm text-zinc-500 mt-1">
+            Explore campos harmônicos, gere progressões e visualize acordes
+          </p>
+        </div>
+        <button
+          onClick={copyLink}
+          className="shrink-0 text-xs px-3 py-1.5 rounded-lg border
+               border-zinc-700 text-zinc-500
+               hover:border-zinc-500 hover:text-zinc-300
+               transition-colors mt-1"
+        >
+          ↗ Copiar link
+        </button>
       </div>
 
       {/* Tabs */}

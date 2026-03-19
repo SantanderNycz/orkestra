@@ -5,6 +5,22 @@ const client = new Anthropic();
 
 export async function POST(req: NextRequest) {
   try {
+    // Mock para desenvolvimento — remove quando quiser usar a API real
+    if (process.env.NODE_ENV === "development") {
+      return NextResponse.json({
+        preset: {
+          root: 9,
+          mode: "Menor",
+          mood: "Melancólico",
+          extension: "7ª",
+          progression: [0, 5, 3, 6],
+          description:
+            "Estilo marcado pelo uso de acordes menores e progressões melancólicas, com forte influência do rock britânico e experimentações harmônicas.",
+          tags: ["Modo menor", "Rock alternativo", "7ths", "Melancólico"],
+        },
+      });
+    }
+
     const { query } = await req.json();
 
     if (!query || typeof query !== "string") {
