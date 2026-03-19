@@ -236,7 +236,7 @@ export function GuitarDiagram({ notes, qual }: GuitarDiagramProps) {
 
       {/* Painel de variantes — expansível */}
       {variantsOpen && (
-        <div className="flex gap-3 flex-wrap pt-1">
+        <div className="flex flex-row gap-3 pt-1">
           {voicings.map((voicing, i) => {
             const tag = classifyVoicing(voicing, i);
             const desc = VOICING_DESCRIPTIONS[tag];
@@ -247,30 +247,28 @@ export function GuitarDiagram({ notes, qual }: GuitarDiagramProps) {
                 key={i}
                 onClick={() => setSelectedVariant(i)}
                 className={`
-                  flex flex-col items-center gap-1 p-2.5 rounded-lg border
-                  text-left transition-all duration-150
-                  focus:outline-none focus:ring-1 focus:ring-zinc-500
-                  ${
-                    isSelected
-                      ? "border-amber-500 bg-amber-950"
-                      : "border-zinc-700 bg-zinc-900 hover:border-zinc-500"
-                  }
-                `}
+            flex flex-col items-center gap-1 p-2.5 rounded-lg border
+            shrink-0 transition-all duration-150
+            focus:outline-none focus:ring-1 focus:ring-zinc-500
+            ${
+              isSelected
+                ? "border-amber-500 bg-amber-950"
+                : "border-zinc-700 bg-zinc-900 hover:border-zinc-500"
+            }
+          `}
               >
                 <span
                   className={`text-[9px] uppercase tracking-widest font-medium
-                  ${isSelected ? "text-amber-500" : "text-zinc-500"}`}
+            ${isSelected ? "text-amber-500" : "text-zinc-500"}`}
                 >
                   {tag}
                 </span>
-
                 <DiagramSVG
                   voicing={voicing}
                   qual={qual}
                   stringNames={GUITAR_STRING_NAMES}
                 />
-
-                <span className="text-[9px] text-zinc-500 text-center max-w-22.5 leading-tight">
+                <span className="text-[9px] text-zinc-500 text-center max-w-[80px] leading-tight">
                   {desc}
                 </span>
               </button>
