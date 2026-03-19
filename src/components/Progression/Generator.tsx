@@ -11,8 +11,8 @@ interface GeneratorProps {
 
 export function Generator({ options, onChange, onGenerate }: GeneratorProps) {
   return (
-    <div className="flex flex-col gap-4 p-4 rounded-xl border border-zinc-700 bg-zinc-900">
-      <span className="text-[11px] text-zinc-500 uppercase tracking-widest">
+    <div className="flex flex-col gap-4 p-4 rounded-xl border border-zinc-800 bg-zinc-900/50">
+      <span className="text-[11px] text-zinc-600 uppercase tracking-widest">
         Gerador
       </span>
 
@@ -94,12 +94,13 @@ export function Generator({ options, onChange, onGenerate }: GeneratorProps) {
       {/* Botão gerar */}
       <button
         onClick={onGenerate}
-        className="w-full py-2 rounded-lg text-sm font-medium
-                   bg-amber-500 hover:bg-amber-400 text-zinc-950
-                   transition-colors duration-150
-                   focus:outline-none focus:ring-1 focus:ring-amber-400"
+        className="w-full py-1.5 rounded-lg text-sm font-medium
+               border border-amber-600 text-amber-400
+               hover:bg-amber-950 hover:text-amber-300
+               transition-all duration-150
+               focus:outline-none focus:ring-1 focus:ring-amber-700"
       >
-        Gerar progressão ↗
+        Gerar ↗
       </button>
     </div>
   );

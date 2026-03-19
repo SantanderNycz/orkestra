@@ -155,36 +155,36 @@ function ChordChip({ chord, isSelected, isInProg, onClick }: ChordChipProps) {
     <button
       onClick={() => onClick(chord)}
       className={`
-        flex-1 min-w-18 rounded-lg px-3 py-2.5 text-left
-        border transition-all duration-150
-        hover:-translate-y-0.5 hover:border-zinc-500
-        focus:outline-none focus:ring-1 focus:ring-zinc-500
-        ${active ? s.selected : s.base}
-      `}
+      flex-1 min-w-17 rounded-lg px-2.5 py-2 text-left
+      border transition-all duration-150
+      hover:-translate-y-0.5
+      focus:outline-none focus:ring-1 focus:ring-zinc-700
+      ${active ? s.selected : s.base}
+    `}
     >
       {/* Numeral romano */}
       <div
-        className={`text-[10px] font-medium mb-1 ${active ? s.roman : "text-zinc-500"}`}
+        className={`text-[9px] font-medium mb-0.5 ${active ? s.roman : "text-zinc-600"}`}
       >
         {chord.roman}
       </div>
 
       {/* Nome do acorde */}
       <div
-        className={`text-[15px] font-medium ${active ? s.name : "text-zinc-100"}`}
+        className={`text-[13px] font-medium ${active ? s.name : "text-zinc-100"}`}
       >
         {chord.name}
       </div>
 
       {/* Qualidade */}
       <div
-        className={`text-[10px] mt-0.5 ${active ? s.label : "text-zinc-600"}`}
+        className={`text-[9px] mt-0.5 ${active ? s.label : "text-zinc-700"}`}
       >
         {QUALITY_LABELS[chord.qual] ?? ""}
       </div>
 
       {/* Notas */}
-      <div className="text-[10px] text-zinc-600 mt-1.5">
+      <div className="text-[9px] text-zinc-700 mt-1">
         {chord.notes.join(" – ")}
       </div>
     </button>

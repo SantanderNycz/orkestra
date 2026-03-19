@@ -98,7 +98,7 @@ export function HarmonicFieldApp() {
   const stabNote = selectedChord ? (STAB_NOTE[selectedChord.qual] ?? "") : "";
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8 flex flex-col gap-8">
+    <div className="max-w-5xl mx-auto px-4 py-8 flex flex-col gap-6">
       {/* Cabeçalho */}
       <div className="flex items-start justify-between gap-4">
         <div>
