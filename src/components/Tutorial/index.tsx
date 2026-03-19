@@ -64,7 +64,7 @@ export function Tutorial({ selectedChord, field, root, mode }: TutorialProps) {
                      disabled:opacity-40 disabled:cursor-not-allowed
                      transition-colors"
         >
-          Explicar acorde selecionado ↗
+          Explicar acorde selecionado
         </button>
         <button
           onClick={() => explain("field")}
@@ -75,7 +75,7 @@ export function Tutorial({ selectedChord, field, root, mode }: TutorialProps) {
                      disabled:opacity-40 disabled:cursor-not-allowed
                      transition-colors"
         >
-          Explicar campo completo ↗
+          Explicar campo completo
         </button>
       </div>
 

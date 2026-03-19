@@ -2,6 +2,8 @@
 
 import type { ProgressionOptions, Mood, Direction } from "@/types/music";
 import { ALL_MOODS } from "@/lib/musicTheory";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons'
 
 interface GeneratorProps {
   options: ProgressionOptions;
@@ -92,16 +94,17 @@ export function Generator({ options, onChange, onGenerate }: GeneratorProps) {
       </div>
 
       {/* Botão gerar */}
-      <button
-        onClick={onGenerate}
-        className="w-full py-1.5 rounded-lg text-sm font-medium
-               border border-amber-600 text-amber-400
-               hover:bg-amber-950 hover:text-amber-300
-               transition-all duration-150
-               focus:outline-none focus:ring-1 focus:ring-amber-700"
-      >
-        Gerar ↗
-      </button>
+<button
+  onClick={onGenerate}
+  className="w-full py-1.5 rounded-lg text-sm font-medium
+             border border-amber-600 text-amber-400
+             hover:bg-amber-950 hover:text-amber-300
+             transition-all duration-150 flex items-center justify-center gap-2
+             focus:outline-none focus:ring-1 focus:ring-amber-700"
+>
+  <FontAwesomeIcon icon={faWandMagicSparkles} className="w-3.5 h-3.5" />
+  Gerar
+</button>
     </div>
   );
 }

@@ -116,7 +116,7 @@ export function HarmonicFieldApp() {
                hover:border-zinc-500 hover:text-zinc-300
                transition-colors mt-1"
         >
-          ↗ Copiar link
+          Copiar link
         </button>
       </div>
 
@@ -179,40 +179,42 @@ export function HarmonicFieldApp() {
           />
 
           {/* Gerador + Display lado a lado em telas grandes */}
-          <div className="flex flex-col lg:flex-row gap-6">
-            <div className="lg:w-64 shrink-0">
+          <div className="flex flex-col lg:flex-row gap-6 items-stretch">
+            <div className="lg:w-56 shrink-0">
               <Generator
                 options={hf.generatorOptions}
                 onChange={hf.setGeneratorOptions}
                 onGenerate={hf.generateProg}
               />
             </div>
-            <div className="flex-1 flex flex-col gap-3">
+            <div className="flex-1 flex flex-col gap-3 rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] text-zinc-500 uppercase tracking-widest">
+                <span className="text-[11px] text-zinc-600 uppercase tracking-widest">
                   Progressão gerada
                 </span>
                 {hf.progression.length > 0 && (
                   <button
                     onClick={() => audio.triggerSequence(hf.progression)}
                     className={`
-                      flex items-center gap-2 text-xs px-3 py-1.5 rounded-md
-                      border transition-colors
-                      ${
-                        audio.isPlayingSequence
-                          ? "border-amber-500 bg-amber-950 text-amber-300"
-                          : "border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-zinc-200"
-                      }
-                    `}
+            flex items-center gap-2 text-xs px-3 py-1.5 rounded-md
+            border transition-colors
+            ${
+              audio.isPlayingSequence
+                ? "border-amber-500 bg-amber-950 text-amber-300"
+                : "border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-zinc-200"
+            }
+          `}
                   >
-                    {audio.isPlayingSequence ? "⏹ Parar" : "▶ Tocar"}
+                    {audio.isPlayingSequence ? "Parar" : "Tocar"}
                   </button>
                 )}
               </div>
-              <Display
-                progression={hf.progression}
-                activeIndex={audio.activeIndex}
-              />
+              <div className="flex-1 flex items-center">
+                <Display
+                  progression={hf.progression}
+                  activeIndex={audio.activeIndex}
+                />
+              </div>
             </div>
           </div>
 
@@ -231,36 +233,36 @@ export function HarmonicFieldApp() {
                              hover:border-zinc-500 hover:text-zinc-200
                              transition-colors"
                 >
-                  ▶ Ouvir acorde
+                  Ouvir acorde
                 </button>
               </div>
 
-              {/* Diagrama de teclado */}
-              <div className="flex flex-col gap-2">
-                <span className="text-[11px] text-zinc-500 uppercase tracking-widest">
-                  Teclado
-                </span>
-                <PianoDiagram
-                  notes={selectedChord.notes}
-                  qual={selectedChord.qual}
-                />
-              </div>
+              {/* Teclado + Guitarra + Ukulele + Notas em grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 items-start">
+                <div className="flex flex-col gap-2 lg:col-span-2">
+                  <span className="text-[11px] text-zinc-600 uppercase tracking-widest">
+                    Teclado
+                  </span>
+                  <PianoDiagram
+                    notes={selectedChord.notes}
+                    qual={selectedChord.qual}
+                  />
+                </div>
 
-              {/* Guitarra + Ukulele + Notas */}
-              <div className="flex flex-wrap gap-8 items-start">
                 <GuitarDiagram
                   notes={selectedChord.notes}
                   qual={selectedChord.qual}
                 />
+
                 <UkuleleDiagram
                   notes={selectedChord.notes}
                   qual={selectedChord.qual}
                 />
 
                 {/* Painel de notas */}
-                <div className="flex flex-col gap-0 rounded-xl border border-zinc-800 overflow-hidden min-w-40">
+                <div className="flex flex-col gap-0 rounded-xl border border-zinc-800 overflow-hidden">
                   <div className="px-4 py-2.5 bg-zinc-900 border-b border-zinc-800">
-                    <span className="text-[11px] text-zinc-500 uppercase tracking-widest">
+                    <span className="text-[11px] text-zinc-600 uppercase tracking-widest">
                       Notas — {selectedChord.name}
                     </span>
                   </div>
@@ -268,7 +270,7 @@ export function HarmonicFieldApp() {
                     <div
                       key={i}
                       className="flex justify-between items-center px-4 py-2
-                                 border-b border-zinc-800 last:border-0"
+                   border-b border-zinc-800 last:border-0"
                     >
                       <span className="text-sm text-zinc-400">
                         {NOTE_ROLE_LABELS[i] ?? "Extensão"}

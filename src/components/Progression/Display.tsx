@@ -106,7 +106,7 @@ function ProgressionCard({ chord, isActive }: ProgressionCardProps) {
   return (
     <div
       className={`
-        rounded-lg border px-4 py-3 text-center min-w-18
+        rounded-lg border px-4 py-3 text-center w-full
         transition-all duration-150
         ${s.card}
         ${isActive ? "scale-105 shadow-lg shadow-amber-900/30" : ""}
@@ -145,16 +145,18 @@ export function Display({ progression, activeIndex }: DisplayProps) {
   const romanSequence = progression.map((c) => c.roman).join(" → ");
 
   return (
-    <div className="flex flex-col gap-3">
-      {/* Cards dos acordes */}
-      <div className="flex gap-2 flex-wrap">
+    <div className="flex flex-col gap-3 w-full">
+      <div
+        className="grid gap-2"
+        style={{
+          gridTemplateColumns: `repeat(${progression.length}, minmax(0, 1fr))`,
+        }}
+      >
         {progression.map((chord, i) => (
           <ProgressionCard key={i} chord={chord} isActive={activeIndex === i} />
         ))}
       </div>
-
-      {/* Numerais romanos */}
-      <div className="text-xs text-zinc-500 tracking-wide">{romanSequence}</div>
+      <div className="text-xs text-zinc-600 tracking-wide">{romanSequence}</div>
     </div>
   );
 }

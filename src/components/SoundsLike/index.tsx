@@ -114,7 +114,7 @@ export function SoundsLike({ onApplyPreset }: SoundsLikeProps) {
                      disabled:opacity-50 disabled:cursor-not-allowed
                      transition-colors"
         >
-          {loading ? "Analisando..." : "Analisar ↗"}
+          {loading ? "Analisando..." : "Analisar"}
         </button>
       </div>
 
@@ -219,7 +219,7 @@ export function SoundsLike({ onApplyPreset }: SoundsLikeProps) {
                        bg-amber-500 hover:bg-amber-400 text-zinc-950
                        transition-colors"
           >
-            Carregar preset no campo ↗
+            Carregar preset no campo
           </button>
         </div>
       )}
